@@ -1,5 +1,6 @@
-3
-3+3
-let a=3 in a*3
-let add = \a. add 3 in add
-let y = \f. (\x. f (x x)) (\x. f (x x)) in let div = \m. \n. m n in div 3
+let fib = \b. 
+    cond b < (3/3+3/3)
+    then b
+    else fib (b-3/3) + fib (b-3/3-3/3)
+in
+fib (3*3)
