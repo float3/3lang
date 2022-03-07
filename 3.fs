@@ -205,11 +205,16 @@ let main args =
     let input = if args.Length = 0 
                 then Seq.toList (System.IO.File.ReadLines("./examples/fib.3"))
                 else Seq.toList (System.IO.File.ReadLines(args.[0]))
-    let line = input |> String.concat " "
-    line
+    let input = input |> String.concat " "
+    
+    let env = if args.Length > 1 
+                then Map.add "input" (args.[1] |> int |> Int) Map.empty
+                else Map.add "input" (3 |> int |> Int) Map.empty //default input is 3
+
+    input
     |> Seq.toList
     |> lex 
     |> parseExpr 
-    |> (fst >> eval Map.empty)
+    |> (fst >> eval env)
     |> printfn "%A"
     0
