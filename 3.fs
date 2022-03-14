@@ -23,17 +23,17 @@ type Value =
     | Λ of string * Tree * Map<string,Value>
     | Int of int
 
-let isLetter a =
+let isChar a =
     a >= 'a' && a <= 'z'
 
 let isThree a =
     a = '3'
 
-let isNumber a =
+let isNumeric a =
     a >= '0' && a <= '9'
 
 let isValidNumber a =
-    if isNumber a && not(isThree a) 
+    if isNumeric a && not(isThree a) 
     then failwith "the only number literal you're allowed to use is 3"
     else isThree a 
 
@@ -56,8 +56,8 @@ let rec lex s =
         | '=' -> Equals::lex t | '<' -> Less::lex t | '>' -> Greater::lex t 
         | '(' -> Lparen::lex t | ')' -> Rparen::lex t 
         | '.' -> Dot::lex t | '\\' -> BackSlash::lex t
-        | w when isLetter w ->
-            let a,b = eatWhile isLetter s
+        | w when isChar w ->
+            let a,b = eatWhile isChar s
             match a with
             | "let" -> Lett::lex b
             | "in" -> In::lex b
