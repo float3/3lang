@@ -1,4 +1,4 @@
-﻿open System
+open System
 
 type Token = 
     | Plus | Minus | Slash | Star 
@@ -34,7 +34,7 @@ let isNumeric a =
 
 let isValidNumber a =
     if isNumeric a && not(isThree a) 
-    then failwith "the only number literal you're allowed to use is 3"
+    then failwith "the only numeric literal you're allowed to use is 3"
     else isThree a 
 
 let rec eatWhile f s =
@@ -79,8 +79,8 @@ let rec parseBot toks =
         a,List.tail b
     | (Identifier h)::t -> Var(h),t
     | (Integer h)::t -> Literal(h),t
-    | _ ->  printfn "parseBot%A" toks
-            failwith "write better code"
+    | _ ->  //printfn "parseBot%A" toks
+            failwith "unexpected token"
 
 and parseApp toks =
     //printfn "App%A" toks
@@ -114,8 +114,8 @@ and parseTerm toks =
             | Else::expr2 ->
                 let expr2,toks = parseExpr expr2
                 If(cond,expr,expr2),toks
-            | _ -> failwith "L"
-        | _ -> failwith "L"
+            | _ -> failwith "missing Else keyword"
+        | _ -> failwith "missing Then keyword"
     | _ -> parseApp toks
 
 and parseFactor toks =
@@ -193,7 +193,7 @@ let rec eval env tree =
             let input = eval env tre
             let env = Map.add i input env
             eval env tree
-        | _ -> failwith "unlucky"
+        | _ -> failwith "eval App not lambda"
 
 let rec buildString input =
     match input with
@@ -218,3 +218,5 @@ let main args =
     |> (fst >> eval env)
     |> printfn "%A"
     0
+
+
