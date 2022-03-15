@@ -175,7 +175,7 @@ let rec eval env tree =
         | Int(l),Equals,Int(r) -> if l = r then Int(1) else Int(0)
         | Int(l),Less,Int(r) -> if l < r then Int(1) else Int(0)
         | Int(l),Greater,Int(r) -> if l > r then Int(1) else Int(0)
-        | _ -> failwith "(:"
+        | _ -> failwith "Unkown Tree"
     | Let(i,tr,tre) -> 
         let env = Map.add i (eval env tr) env
         eval env tre
