@@ -1,6 +1,5 @@
 let fib = \b. 
-    cond b < (3/3+3/3)
+    cond b < 2
     then b
-    else fib (b-3/3) + fib (b-3/3-3/3)
-in
-fib input
+    else fib (b-1) + fib (b-2)
+in fib input

@@ -7,7 +7,7 @@ type Token =
     | Lparen | Rparen 
     | Integer of int //| String of string | Char of char
     | Identifier of string
-    | Lett | In
+    | Declaration | In
     | Cond | Then | Else
 
 type Tree =
@@ -26,16 +26,8 @@ type Value =
 let isChar a =
     a >= 'a' && a <= 'z'
 
-let isThree a =
-    a = '3'
-
 let isNumeric a =
     a >= '0' && a <= '9'
-
-let isValidNumber a =
-    if isNumeric a && not(isThree a) 
-    then failwith "the only numeric literal you're allowed to use is 3"
-    else isThree a 
 
 let rec eatWhile f s =
     match s with
@@ -59,14 +51,14 @@ let rec lex s =
         | w when isChar w ->
             let a,b = eatWhile isChar s
             match a with
-            | "let" -> Lett::lex b
+            | "let" -> Declaration::lex b
             | "in" -> In::lex b
             | "cond" -> Cond::lex b
             | "then" -> Then::lex b
             | "else" -> Else::lex b 
             | _ -> Identifier(a)::lex b
-        | w when isValidNumber w ->
-            let a,b = eatWhile isValidNumber s
+        | w when isNumeric w ->
+            let a,b = eatWhile isNumeric s
             (a |> int |> Integer)::lex b
         | _ -> lex t
     | [] -> []
@@ -98,7 +90,7 @@ and parseApp toks =
 and parseTerm toks =
     //printfn "Term%A" toks
     match toks with
-    | Lett::Identifier(a)::Equals::t -> 
+    | Declaration::Identifier(a)::Equals::t -> 
         let tree,toks = parseExpr t
         let rest,var = parseExpr (List.tail toks)
         Let(a,tree,rest),var

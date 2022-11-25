@@ -4,34 +4,30 @@
 ## why
 this project was my first F# program as well as my first experience in making a language
 
-## quirks
-in 3lang the only numeric literal allowed is '3' 
-so you have to construct any number you need from 3
-
 ## examples
 the following are example programs written in 3lang
 
 Fibonacci Numbers:
-```
+```fs
 let fib = \b. 
-    cond b < (3/3+3/3)
+    cond b < 2
     then b
-    else fib (b-3/3) + fib (b-3/3-3/3)
+    else fib (b-1) + fib (b-2)
 in fib input
 ```
 
 Factorial:
-```
+```fs
 let a = (\b. 
-    cond b < (3/3+3/3) 
+    cond b < 2 
     then b 
-    else b * a (b-(3/3))) 
+    else b * a (b-1)) 
 in a input
 ```
 
 ## installing and running a program
 
-```cmd
+```bash
 git clone https://github.com/Float3/3lang.git
 cd ./3lang
 dotnet run "./examples/fib.3" <N> 
