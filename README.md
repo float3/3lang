@@ -1,11 +1,11 @@
-# 3lang
-3lang is a interpreted functional toy language written in F#
+# lang
+lang is a interpreted functional toy language written in F#
 
 ## why
 this project was my first F# program as well as my first experience in making a language
 
 ## examples
-the following are example programs written in 3lang
+the following are example programs written in lang
 
 Fibonacci Numbers:
 ```fs
@@ -28,7 +28,7 @@ in a input
 ## installing and running a program
 
 ```bash
-git clone https://github.com/Float3/3lang.git
+git clone https://github.com/float3/lang.git
 cd ./3lang
 dotnet run "./examples/fib.3" <N> 
 ```

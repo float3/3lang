@@ -194,14 +194,10 @@ let rec buildString input =
 
 [<EntryPoint>]
 let main args = 
-    let input = if args.Length = 0 
-                then Seq.toList (System.IO.File.ReadLines("./examples/fib.3"))
-                else Seq.toList (System.IO.File.ReadLines(args.[0]))
+    let input = Seq.toList (System.IO.File.ReadLines(args.[0]))
     let input = input |> String.concat " "
     
-    let env = if args.Length > 1 
-                then Map.add "input" (args.[1] |> int |> Int) Map.empty
-                else Map.add "input" (3 |> int |> Int) Map.empty //default input is 3
+    let env = Map.add "input" (args.[1] |> int |> Int) Map.empty
 
     input
     |> Seq.toList
