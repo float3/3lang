@@ -29,7 +29,7 @@ in a input
 
 ```bash
 git clone https://github.com/float3/lang.git
-cd ./3lang
+cd ./lang
 dotnet run "./examples/fib.3" <N> 
 ```
 
