@@ -16,7 +16,7 @@ let fib = \b.
 in fib input
 ```
 
-Factorial:
+factorial:
 ```fs
 let a = (\b. 
     cond b < 2 
